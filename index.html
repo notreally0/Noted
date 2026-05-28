@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Akaya+Kanadaka&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Styles.css">
+    <link rel="shortcut icon" href="assets/Favicon .png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <title>Noted</title>
+</head>
+<body>
+    <header>
+        <!--Tittle-->
+
+        <h1 id="title">Noted</h1>
+    </header>
+
+    <main class="Cards">
+        <!--Stopwatch-->
+
+    <div class="stopwatch">
+        <h1>Stopwatch   <i class="fa-solid fa-clock"></i> </h1>
+        <hr>
+        <h1 id="display">00:00:00</h1>
+
+      <div class="buttons">
+        <button id="startbtn">Start</button>
+        <button id="pausebtn">Pause</button>
+        <button id="resetbtn">Reset</button>
+      </div>
+
+    </div>
+        <!--NOTESSS-->
+
+    <div class="quick-notes">
+        <h1 id="title-notes">Quick Notes <i class="fa-solid fa-book"></i></h1>
+        <textarea id="notes" placeholder="Write your notes..."></textarea> 
+    </div>
+        <!--Todo-->
+
+    <div class="todo-container">
+
+    <h1>Todo List <i class="fa-solid fa-list"></i></h1>
+
+    <div class="input-box">
+        <input type="text" id="taskInput" placeholder="Write a task...">
+        <button id="addBtn"><i class="fa-solid fa-plus"></i></button>
+    </div>
+    <ul id="taskList"></ul>
+    </div>
+    </main>
+
+<script>
+const display = document.getElementById("display");
+
+let time = 0;
+let timer;
+
+function update(){
+  let h = String(Math.floor(time / 3600)).padStart(2,"0");
+  let m = String(Math.floor(time % 3600 / 60)).padStart(2,"0");
+  let s = String(time % 60).padStart(2,"0");
+
+  display.innerText = `${h}:${m}:${s}`;
+}
+
+startbtn.onclick = () => {
+  if(timer) return;
+
+  timer = setInterval(() => {
+    time++;
+    update();
+  },1000);
+};
+
+pausebtn.onclick = () => {
+  clearInterval(timer);
+  timer = null;
+};
+
+resetbtn.onclick = () => {
+  clearInterval(timer);
+  timer = null;
+  time = 0;
+  update();
+};
+
+const input = document.getElementById("taskInput");
+const button = document.getElementById("addBtn");
+const list = document.getElementById("taskList");
+
+button.addEventListener("click", () => {
+
+  if(input.value === "") return;
+
+  const li = document.createElement("li");
+
+  li.innerHTML = `
+    ${input.value}
+    <button class="delete">X</button>
+  `;
+
+  list.appendChild(li);
+
+  const deleteBtn = li.querySelector(".delete");
+
+  deleteBtn.addEventListener("click", () => {
+    li.remove();
+  });
+
+  input.value = "";
+
+});
+</script>
+</body>
+</html>
+
+<!--jdfkjdfffffs  dj sdfhs sdhfs djfsh dfskdjf hskjdfhskjdfhkdsj fksjdfh sjdhf sjkd fhsjkfhksdjfhsdkjfhskjfhjskfkjhsdjfhsdjkfhjks\hfjsjfjskjsfkjsjkkjskjdfhskjdhfksjfhs-->
